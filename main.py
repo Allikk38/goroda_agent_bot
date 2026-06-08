@@ -1,12 +1,13 @@
 import telebot
 import logging
-from telebot.types import Reimport os
+import os
 from dotenv import load_dotenv
+from telebot.types import ReplyKeyboardMarkup, KeyboardButton
 
 load_dotenv()
 
 BOT_TOKEN = os.getenv('BOT_TOKEN')
-ADMIN_CHAT_ID = int(os.getenv('ADMIN_CHAT_ID'))plyKeyboardMarkup, KeyboardButton
+ADMIN_CHAT_ID = int(os.getenv('ADMIN_CHAT_ID'))
 
 # --- ЛОГИРОВАНИЕ ---
 logging.basicConfig(level=logging.INFO)
@@ -108,7 +109,6 @@ def handle_phone(message):
     user_id = message.chat.id
     user_data[user_id]['phone'] = message.text
     
-    # Отправляем данные админу
     answer = (
         "📝 *Новая заявка с канала «Города»*\n\n"
         f"👤 *Имя:* {user_data[user_id].get('name', '—')}\n"
@@ -124,7 +124,6 @@ def handle_phone(message):
     
     bot.send_message(ADMIN_CHAT_ID, answer, parse_mode='Markdown')
     
-    # Финальное сообщение пользователю
     bot.send_message(
         user_id,
         "✅ *Спасибо!* Ваши данные переданы нашему специалисту.\n"
@@ -132,7 +131,6 @@ def handle_phone(message):
         parse_mode='Markdown'
     )
     
-    # Очищаем данные пользователя
     user_data.pop(user_id, None)
 
 # --- ЗАПУСК БОТА (LONG POLLING) ---
