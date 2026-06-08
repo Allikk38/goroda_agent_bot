@@ -1,6 +1,12 @@
 import telebot
 import logging
-from telebot.types import ReplyKeyboardMarkup, KeyboardButton
+from telebot.types import Reimport os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+BOT_TOKEN = os.getenv('BOT_TOKEN')
+ADMIN_CHAT_ID = int(os.getenv('ADMIN_CHAT_ID'))plyKeyboardMarkup, KeyboardButton
 
 # --- ЛОГИРОВАНИЕ ---
 logging.basicConfig(level=logging.INFO)
